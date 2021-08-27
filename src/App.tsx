@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import AppRouter from "./utils/AppRouter";
+import "./styles/app.scss";
+import firebase from "firebase";
+
+firebase.initializeApp({
+  apiKey: "AIzaSyDc9m3WVlMYOIHtfjE6SXRacg6punYqLb4",
+  authDomain: "anime-8d4be.firebaseapp.com",
+  projectId: "anime-8d4be",
+  storageBucket: "anime-8d4be.appspot.com",
+  messagingSenderId: "810152201336",
+  appId: "1:810152201336:web:202fbd0424f291456b718d",
+  measurementId: "G-PRK95M5GMV",
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <AppRouter />
     </div>
   );
 }
