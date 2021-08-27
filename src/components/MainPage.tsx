@@ -1,7 +1,7 @@
-import React from "react";
 import { useActions } from "../hooks/useAction";
+import style from "../styles/main.module.scss";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   const { setLogOut } = useActions();
 
   const handleLogOut = () => {
@@ -9,7 +9,7 @@ const MainPage = () => {
   };
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <button onClick={handleLogOut}>Logout</button>
     </div>
   );

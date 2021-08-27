@@ -4,7 +4,7 @@ import "./styles/app.scss";
 import firebase from "firebase";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDc9m3WVlMYOIHtfjE6SXRacg6punYqLb4",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "anime-8d4be.firebaseapp.com",
   projectId: "anime-8d4be",
   storageBucket: "anime-8d4be.appspot.com",
