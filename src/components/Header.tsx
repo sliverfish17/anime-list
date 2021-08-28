@@ -1,8 +1,14 @@
+import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/header.module.scss";
 
 const Header = () => {
   const { user } = useTypedSelector((state) => state);
+  const { setLogOut } = useActions();
+
+  const handleLogOut = () => {
+    setLogOut();
+  };
 
   return (
     <div className={style.header}>
@@ -31,6 +37,9 @@ const Header = () => {
                 alt="userPhoto"
                 className={style.picture}
               />
+              <button onClick={handleLogOut} className={style.logout}>
+                Logout
+              </button>
             </div>
           )}
         </>

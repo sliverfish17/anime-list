@@ -1,20 +1,17 @@
-import firebase from "firebase";
-import { useActions } from "../hooks/useAction";
-import style from "../styles/main.module.scss";
-import { UserLogin } from "../types/user";
-import girl from "../assets/img/zeroTwo.svg";
 import { useState } from "react";
+
 import LoginModal from "./Modal/LoginModal";
 
+import style from "../styles/main.module.scss";
+import modalStyle from "../styles/modal.module.scss";
+
+import girl from "../assets/img/zeroTwo.svg";
+
 const Login: React.FC = () => {
-  const auth = firebase.auth();
-
-  const { setUserData, setLoggedIn } = useActions();
-
   const [modal, setModalActive] = useState(false);
 
   const outsideClick = (e: any) => {
-    if (e.target.className === "modal active") {
+    if (e.target.className === modalStyle.modal_active) {
       setModalActive(false);
     }
   };
@@ -23,15 +20,11 @@ const Login: React.FC = () => {
     setModalActive((store) => !store);
   };
 
-  const loginGoogle = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const { user }: UserLogin = await auth.signInWithPopup(provider);
-    setLoggedIn();
-    setUserData(user);
-  };
-
   return (
     <div className={style.wrapper}>
+      {modal && (
+        <LoginModal active={modal} outsideClick={outsideClick}></LoginModal>
+      )}
       <div className={style.content}>
         <div className={style.content__left}>
           <p className={style.title}>A new level of anime lists</p>
@@ -50,9 +43,6 @@ const Login: React.FC = () => {
           <div className={style.round}></div>
         </div>
       </div>
-      {modal && (
-        <LoginModal active={modal} outsideClick={outsideClick}></LoginModal>
-      )}
     </div>
   );
 };

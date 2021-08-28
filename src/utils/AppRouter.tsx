@@ -6,8 +6,6 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 function AppRouter() {
   const { user } = useTypedSelector((state) => state);
 
-  console.log(user);
-
   return user.user ? (
     <Switch>
       {privateRoutes.map(({ path, Component }) => {
