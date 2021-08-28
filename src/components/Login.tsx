@@ -21,7 +21,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={style.wrapper}>
+    <div className={style.wrapper_login}>
       {modal && (
         <LoginModal active={modal} outsideClick={outsideClick}></LoginModal>
       )}
@@ -29,10 +29,10 @@ const Login: React.FC = () => {
         <div className={style.content__left}>
           <p className={style.title}>A new level of anime lists</p>
           <span className={style.description}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt,
-            ea numquam laboriosam saepe consequatur in exercitationem, assumenda
-            velit voluptates sunt ex suscipit ipsum quia esse repudiandae autem
-            provident! Ad, molestiae.
+            This is a unique website where you can manage lists with you
+            favourite anime, sort it and find some new titles to enjoy! Share
+            your list with friends and compare how bigger and cooler your list
+            is!
           </span>
           <button className={style.btn} onClick={toggleModal}>
             Start now!

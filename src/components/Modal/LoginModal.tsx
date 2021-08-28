@@ -1,10 +1,11 @@
 import React from "react";
-import firebase from "firebase";
-import { useActions } from "../../hooks/useAction";
-import { UserLogin } from "../../types/user";
 import style from "../../styles/modal.module.scss";
 import googleLogo from "../../assets/img/googleLogo.svg";
 import githubLogo from "../../assets/img/githubLogo.svg";
+import { useActions } from "../../hooks/useAction";
+import { UserLogin } from "../../types/user";
+import firebase from "firebase";
+import { auth } from "../../firebase";
 
 interface ModalMapProps {
   active: boolean;
@@ -12,8 +13,7 @@ interface ModalMapProps {
 }
 
 export const ModalMap: React.FC<ModalMapProps> = ({ active, outsideClick }) => {
-  const { setUserData, setLoggedIn } = useActions();
-  const auth = firebase.auth();
+  const { setLoggedIn, setUserData } = useActions();
 
   const loginGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -40,14 +40,14 @@ export const ModalMap: React.FC<ModalMapProps> = ({ active, outsideClick }) => {
         <div>
           <h1>Sign in</h1>
           <hr />
-          <div className={style.methods} onClick={() => loginGoogle()}>
+          <div className={style.methods} onClick={loginGoogle}>
             <div className={style.round}>
               <img src={googleLogo} alt="googleLogo" className={style.logos} />
             </div>
 
             <span>Login with Google</span>
           </div>
-          <div className={style.methods} onClick={() => loginGithub()}>
+          <div className={style.methods} onClick={loginGithub}>
             <div>
               <div className={style.round}>
                 <img

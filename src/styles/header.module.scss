@@ -1,26 +1,30 @@
 .header {
   font-family: "Montserrat", sans-serif;
-
   width: 100%;
   height: 100px;
   background: #333333;
   display: flex;
   align-items: center;
+  justify-content: center;
+  .logo {
+    background: url("../assets/img/logo.svg") no-repeat center center;
+    height: 58px;
+    width: 58px;
+    margin-right: 20px;
+  }
 }
 
 .logoBlock {
   font-family: "Montserrat", sans-serif;
-  margin-left: 45%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   font-family: "Montserrat", sans-serif;
   font-size: 30px;
   font-weight: 900;
   color: #fff;
   &__logged {
-    margin-left: 20%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,10 +37,10 @@
       height: 43px;
       width: 281px;
       border-radius: 30px;
-      background: #555555;
       margin: 0 70px 0 600px;
       &__field {
-        width: 241px;
+        background: #555555;
+        width: 261px;
         height: 43px;
         padding: 12px 12px 12px 40px;
         background-image: url("../assets/img/loupe.svg");
@@ -66,15 +70,35 @@
       height: 50px;
       background: #ff6766;
       color: #fff;
-      border-radius: 20px;
+      border-radius: 25px;
       font-weight: 700;
+      border: transparent;
+    }
+    .logout:active {
+      transform: translateY(1.5px);
     }
   }
 }
 
-.logo {
-  background: url("../assets/img/logo.svg") no-repeat center center;
-  height: 58px;
-  width: 58px;
-  margin-right: 20px;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 0;
+  -webkit-text-fill-color: white;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 174, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0) 51%,
+    rgba(0, 174, 255, 0.03) 100%
+  );
+  color: #fff;
 }
