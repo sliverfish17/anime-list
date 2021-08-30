@@ -1,18 +1,21 @@
 import React from "react";
+import firebase from "firebase";
+import { auth } from "../../firebase";
+import { useActions } from "../../hooks/useAction";
 import style from "../../styles/modal.module.scss";
 import googleLogo from "../../assets/img/googleLogo.svg";
 import githubLogo from "../../assets/img/githubLogo.svg";
-import { useActions } from "../../hooks/useAction";
 import { UserLogin } from "../../types/user";
-import firebase from "firebase";
-import { auth } from "../../firebase";
 
-interface ModalMapProps {
+interface LoginModalProps {
   active: boolean;
   outsideClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const ModalMap: React.FC<ModalMapProps> = ({ active, outsideClick }) => {
+export const LoginModal: React.FC<LoginModalProps> = ({
+  active,
+  outsideClick,
+}) => {
   const { setLoggedIn, setUserData } = useActions();
 
   const loginGoogle = async () => {
@@ -65,4 +68,4 @@ export const ModalMap: React.FC<ModalMapProps> = ({ active, outsideClick }) => {
   );
 };
 
-export default ModalMap;
+export default LoginModal;
