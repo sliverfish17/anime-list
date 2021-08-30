@@ -1,6 +1,7 @@
 import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/header.module.scss";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { user } = useTypedSelector((state) => state);
@@ -23,15 +24,7 @@ const Header = () => {
             <div className={style.logoBlock__logged}>
               <div className={style.logo}></div>
               <span>AniList</span>
-              <div className={style.search}>
-                <input
-                  type="text"
-                  name="search"
-                  placeholder="Search..."
-                  className={style.search__field}
-                />
-              </div>
-
+              <SearchBar />
               <img
                 src={user.user.photoURL}
                 alt="userPhoto"
