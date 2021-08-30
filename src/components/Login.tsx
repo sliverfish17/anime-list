@@ -3,7 +3,7 @@ import { useState } from "react";
 import LoginModal from "./Modals/LoginModal";
 
 import style from "../styles/main.module.scss";
-import modalStyle from "../styles/modal.module.scss";
+import modalStyle from "../styles/modal-login.module.scss";
 
 import girl from "../assets/img/zeroTwo.svg";
 
@@ -11,7 +11,7 @@ const Login: React.FC = () => {
   const [modal, setModalActive] = useState(false);
 
   const outsideClick = (e: any) => {
-    if (e.target.className === modalStyle.modal_active) {
+    if (e.target.className === modalStyle.modal__active) {
       setModalActive(false);
     }
   };

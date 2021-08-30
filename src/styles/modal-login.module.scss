@@ -16,11 +16,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 556px;
-    height: 387px;
     background: #333333;
     border-radius: 50px;
-    &_active {
+    &__active {
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -33,7 +31,7 @@
       pointer-events: all;
     }
   }
-  &_active {
+  &__active {
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
     font-weight: 500;
@@ -52,10 +50,6 @@
   }
 }
 
-.modal.active {
-  opacity: 1;
-  pointer-events: all;
-}
 .methods {
   cursor: pointer;
   margin-top: 30px;

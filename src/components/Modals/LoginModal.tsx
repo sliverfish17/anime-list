@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "firebase";
 import { auth } from "../../firebase";
 import { useActions } from "../../hooks/useAction";
-import style from "../../styles/modal.module.scss";
+import style from "../../styles/modal-login.module.scss";
 import googleLogo from "../../assets/img/googleLogo.svg";
 import githubLogo from "../../assets/img/githubLogo.svg";
 import { UserLogin } from "../../types/user";
@@ -34,11 +34,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   return (
     <div
-      className={active ? style.modal_active : style.modal}
+      className={active ? style.modal__active : style.modal}
       onClick={outsideClick}
     >
       <div
-        className={active ? style.modal_content_active : style.modal_content}
+        className={active ? style.modal_content__active : style.modal_content}
       >
         <div>
           <h1>Sign in</h1>

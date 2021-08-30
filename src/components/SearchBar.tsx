@@ -9,9 +9,9 @@ const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchArray, setSearchArray]: any[] = useState([]);
   const [chosenAnime, setChosenAnime] = useState<null | number>(null);
-  const [dispatchedAnime, setDispatchedAnime]: any = useState([]);
+  const [dispatchedAnime, setDispatchedAnime]: any[] = useState([]);
 
-  const { setAnime } = useActions();
+  const { showChosenAnime } = useActions();
 
   useEffect(() => {
     if (searchQuery.length > 2) {
@@ -31,7 +31,7 @@ const SearchBar: React.FC = () => {
       axios
         .get(`https://api.jikan.moe/v3/anime/${chosenAnime}`)
         .then((response: IAnimeChoice) => {
-          setDispatchedAnime(setAnime(response.data).payload);
+          setDispatchedAnime(showChosenAnime(response.data).payload);
         });
     }
   }, [chosenAnime]);
@@ -46,6 +46,7 @@ const SearchBar: React.FC = () => {
         placeholder="Search anime..."
         className={style.search__field}
       />
+
       <ul
         className={
           searchQuery.length < 3

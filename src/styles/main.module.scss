@@ -121,6 +121,10 @@
           font-size: 26px;
           line-height: 35px;
           color: #ffffff;
+          transition: transform 250ms;
+        }
+        &__link:hover {
+          transform: translateY(-6px);
         }
 
         &__icons {

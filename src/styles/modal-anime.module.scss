@@ -1,0 +1,120 @@
+.modal {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+  &_content {
+    &__active {
+      display: flex;
+      flex-direction: row;
+      padding: 60px;
+      width: 1170px;
+      height: 684px;
+      background: #333333;
+      border-radius: 50px;
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+  &__active {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    height: 100vh;
+    width: 100vw;
+    padding-top: 85px;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  font-size: 36px;
+  padding-bottom: 20px;
+  .anime {
+    display: flex;
+    padding-bottom: 30px;
+    &__poster {
+      width: 320px;
+      height: 455px;
+      border-radius: 14px;
+      margin-right: 58px;
+    }
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__title {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    &__description {
+      display: -webkit-box;
+      -webkit-line-clamp: 11;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-weight: 400;
+      font-size: 19px;
+      text-overflow: ellipsis;
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+    }
+    &__start {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+    &__genres {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  }
+  .options {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    &__btn {
+      font-weight: 400;
+      font-family: "Montserrat", sans-serif;
+      font-size: 20px;
+      color: #fff;
+      cursor: pointer;
+      width: 130px;
+      height: 65px;
+      border-radius: 30px;
+      border: 4px solid #222222;
+      background-color: #333333;
+      transition: transform 250ms;
+    }
+    &__btn:hover {
+      transform: translateY(-6px);
+    }
+    &__icon {
+      height: 50px;
+      width: 50px;
+    }
+  }
+}

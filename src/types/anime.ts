@@ -1,18 +1,23 @@
 export interface AnimeState {
-  animeId: number | null;
-  anime: IAnimeChoice[];
+  chosenAnime: IAnimeChoice[];
 }
 
 export enum AnimeActionTypes {
-  SET_ANIME = "SET_ANIME",
+  SHOW_CHOSEN_ANIME = "SHOW_CHOSEN_ANIME",
+  HIDE_CHOSEN_ANIME = "HIDE_CHOSEN_ANIME",
 }
 
-interface SetAnimeAction {
-  type: AnimeActionTypes.SET_ANIME;
+interface ShowAnimeAction {
+  type: AnimeActionTypes.SHOW_CHOSEN_ANIME;
   payload: IAnimeChoice[];
 }
 
-export type AnimeAction = SetAnimeAction;
+interface HideAnimeAction {
+  type: AnimeActionTypes.HIDE_CHOSEN_ANIME;
+  payload: [];
+}
+
+export type AnimeAction = ShowAnimeAction | HideAnimeAction;
 
 export interface IAnimeChoice {
   data: {
@@ -22,7 +27,26 @@ export interface IAnimeChoice {
     rank: number;
     premiered: string;
     title: string;
-    animeId: number | null;
-    anime: IAnimeChoice[];
+    chosenAnime: IAnimeChoice[];
   };
 }
+
+export type TAnime = {
+  image_url: string;
+  airing: boolean;
+  type: string;
+  episodes: number;
+  mal_id: number;
+  rank: number;
+  premiered: string;
+  title: string;
+  chosenAnime: TAnime;
+  synopsis: string;
+  aired: {
+    from: string;
+    to: string;
+  };
+  genres: {
+    name: string;
+  }[];
+};

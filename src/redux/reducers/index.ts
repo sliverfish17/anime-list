@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
+import animeReducer from "./animeReducer";
 import userReducer from "./userReducer";
 
 const appReducer = combineReducers({
   user: userReducer,
+  anime: animeReducer,
 });
 
 export const rootReducer = (state: any, action: any) => {
