@@ -9,7 +9,7 @@ import paused from "../assets/img/paused.png";
 import dropped from "../assets/img/dropped.png";
 
 const LeftBar = () => {
-  const { user } = useTypedSelector((state) => state);
+  const { user } = useTypedSelector((state) => state.user);
 
   const [choice, setChoice] = useState(0);
 
@@ -17,12 +17,12 @@ const LeftBar = () => {
     <div className={style.left}>
       <div className={style.user}>
         <img
-          src={user?.user?.photoURL}
+          src={user?.photoURL}
           alt="user_photo"
           className={style.user__pic}
         />
-        <span className={style.user__name}>{user?.user?.displayName}</span>
-        <span className={style.user__email}>{user?.user?.email}</span>
+        <span className={style.user__name}>{user?.displayName}</span>
+        <span className={style.user__email}>{user?.email}</span>
         <ul className={style.list}>
           <div
             onClick={() => setChoice(0)}

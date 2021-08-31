@@ -8,3 +8,8 @@ export const showChosenAnime = (anime: AnimeState) => ({
 export const hideChosenAnime = () => ({
   type: "HIDE_CHOSEN_ANIME",
 });
+
+export const fetchNewAnime = (anime: AnimeState) => ({
+  type: "FETCH_NEW_ANIME",
+  payload: anime,
+});

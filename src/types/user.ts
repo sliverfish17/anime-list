@@ -1,7 +1,13 @@
 export interface UserState {
-  user: { [key: string]: any } | null;
+  user: TUser | null;
   loggedIn: boolean;
 }
+
+export type TUser = {
+  photoURL: string;
+  displayName: string;
+  email: string;
+};
 
 export interface UserLogin {
   user: any | null;
@@ -15,7 +21,7 @@ export enum UserActionTypes {
 
 interface SetUserAction {
   type: UserActionTypes.SET_USER;
-  payload: any[];
+  payload: TUser;
 }
 
 interface FetchUserLoggedIn {

@@ -15,7 +15,7 @@ const user = (state = initialState, action: UserAction): UserState => {
 
     case UserActionTypes.SET_USER_LOGGED_IN:
       return {
-        user: { ...state },
+        ...state,
         loggedIn: action.payload,
       };
 

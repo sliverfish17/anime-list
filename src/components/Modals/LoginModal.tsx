@@ -1,11 +1,12 @@
 import React from "react";
-import firebase from "firebase";
+import { firebase } from "../../firebase";
 import { auth } from "../../firebase";
 import { useActions } from "../../hooks/useAction";
 import style from "../../styles/modal-login.module.scss";
 import googleLogo from "../../assets/img/googleLogo.svg";
 import githubLogo from "../../assets/img/githubLogo.svg";
 import { UserLogin } from "../../types/user";
+import { loginCheck } from "../../utils/api";
 
 interface LoginModalProps {
   active: boolean;
@@ -23,6 +24,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     const { user }: UserLogin = await auth.signInWithPopup(provider);
     setLoggedIn();
     setUserData(user);
+    loginCheck(user?.displayName, user?.email, user?.photoURL, user?.uid);
   };
 
   const loginGithub = async () => {
@@ -30,6 +32,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     const { user }: UserLogin = await auth.signInWithPopup(provider);
     setLoggedIn();
     setUserData(user);
+    loginCheck(user?.displayName, user?.email, user?.photoURL, user?.uid);
   };
 
   return (
