@@ -1,6 +1,13 @@
+import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/main.module.scss";
+import { UserState } from "../types/user";
+import { getUserInfo } from "../utils/api";
 
 const RightBar = () => {
+  const { user }: UserState = useTypedSelector((state) => state.user);
+
+  console.log(getUserInfo(user?.uid).then((e) => e));
+
   return (
     <div className={style.right}>
       <div className={style.sort}>

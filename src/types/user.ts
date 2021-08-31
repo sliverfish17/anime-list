@@ -7,6 +7,11 @@ export type TUser = {
   photoURL: string;
   displayName: string;
   email: string;
+  uid: string;
+};
+
+export type TUserId = {
+  uid: string;
 };
 
 export interface UserLogin {

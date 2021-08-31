@@ -9,7 +9,7 @@ import { TAnime } from "../types/anime";
 import { useActions } from "../hooks/useAction";
 
 const MainPage: React.FC = () => {
-  const { chosenAnime }: TAnime = useTypedSelector((state) => state.anime);
+  const { chosen }: TAnime = useTypedSelector((state) => state.shownAnime);
   const { hideChosenAnime } = useActions();
 
   const [modal, setModalActive] = useState(false);
@@ -26,16 +26,16 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (chosenAnime.title) {
+    if (chosen.title) {
       toggleModal();
     }
-  }, [chosenAnime]);
+  }, [chosen]);
 
   return (
     <div className={style.wrapper}>
       {modal && (
         <AnimeModal
-          data={chosenAnime}
+          data={chosen}
           active={modal}
           outsideClick={outsideClick}
         ></AnimeModal>

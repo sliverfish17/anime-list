@@ -2,6 +2,9 @@ import React from "react";
 import style from "../../styles/modal-anime.module.scss";
 import { TAnime } from "../../types/anime";
 import trash from "../../assets/img/trash-can.png";
+import { getUserInfo, setNewAnime } from "../../utils/api";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { UserState } from "../../types/user";
 
 interface AnimeModalProps {
   active: boolean;
@@ -14,6 +17,8 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
   active,
   outsideClick,
 }) => {
+  const { user }: UserState = useTypedSelector((state) => state.user);
+
   return (
     <div
       className={active ? style.modal__active : style.modal}
@@ -51,11 +56,36 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
           </div>
           <hr />
           <div className={style.options}>
-            <button className={style.options__btn}>Current</button>
-            <button className={style.options__btn}>Planning</button>
-            <button className={style.options__btn}>Completed</button>
-            <button className={style.options__btn}>Paused</button>
-            <button className={style.options__btn}>Dropped</button>
+            <button
+              onClick={() => setNewAnime(user?.uid, 0, data.mal_id)}
+              className={style.options__btn}
+            >
+              Current
+            </button>
+            <button
+              onClick={() => setNewAnime(user?.uid, 1, data.mal_id)}
+              className={style.options__btn}
+            >
+              Planning
+            </button>
+            <button
+              onClick={() => setNewAnime(user?.uid, 2, data.mal_id)}
+              className={style.options__btn}
+            >
+              Completed
+            </button>
+            <button
+              onClick={() => setNewAnime(user?.uid, 3, data.mal_id)}
+              className={style.options__btn}
+            >
+              Paused
+            </button>
+            <button
+              onClick={() => setNewAnime(user?.uid, 4, data.mal_id)}
+              className={style.options__btn}
+            >
+              Dropped
+            </button>
             <button className={style.options__btn}>
               <img src={trash} alt="trash" className={style.options__icon} />
             </button>

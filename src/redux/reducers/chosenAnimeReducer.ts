@@ -1,16 +1,16 @@
-import { AnimeActionTypes, AnimeState } from "./../../types/anime";
+import { AnimeActionTypes, ChosenAnimeState } from "../../types/anime";
 import { AnimeAction } from "../../types/anime";
 
 const initialState = {
-  chosenAnime: [],
+  chosen: [],
 };
 
-const anime = (state = initialState, action: AnimeAction): AnimeState => {
+const anime = (state = initialState, action: AnimeAction): ChosenAnimeState => {
   switch (action.type) {
     case AnimeActionTypes.SHOW_CHOSEN_ANIME:
       return {
         ...state,
-        chosenAnime: action.payload,
+        chosen: action.payload,
       };
     case AnimeActionTypes.HIDE_CHOSEN_ANIME:
       return initialState;

@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import animeReducer from "./animeReducer";
+import chosenAnimeReducer from "./chosenAnimeReducer";
 import userReducer from "./userReducer";
+import pageAnimeReducer from "./pageAnimeReducer";
 
 const appReducer = combineReducers({
   user: userReducer,
-  anime: animeReducer,
+  shownAnime: chosenAnimeReducer,
+  displayedAnime: pageAnimeReducer,
 });
 
 export const rootReducer = (state: any, action: any) => {
