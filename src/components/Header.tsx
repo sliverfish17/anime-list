@@ -26,7 +26,7 @@ const Header = () => {
               <span>AniList</span>
               <SearchBar />
               <img
-                src={user.user.photoURL}
+                src={user?.user?.photoURL}
                 alt="userPhoto"
                 className={style.picture}
               />

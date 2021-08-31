@@ -1,4 +1,5 @@
 import { db } from "../firebase";
+import { arrayUnion } from "firebase/firestore";
 
 export async function createUser(
   displayName: string,
@@ -51,12 +52,20 @@ export async function setNewAnime(
 ) {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
+  console.log("doc", doc);
+
   switch (list) {
     case 0:
       if (doc.data()?.current.length === 0) {
-        await db.collection("users").doc(uid).update({ current: item });
+        await db
+          .collection("users")
+          .doc(uid)
+          .update({ current: [item] });
       } else {
-        await db.collection("users").doc(uid).update({ current: item });
+        await db
+          .collection("users")
+          .doc(uid)
+          .update({ current: arrayUnion(item) });
       }
       console.log(doc.data()?.current);
 
@@ -66,12 +75,12 @@ export async function setNewAnime(
         await db
           .collection("users")
           .doc(uid)
-          .update({ planning: { anime: item } });
+          .update({ planning: [item] });
       } else {
         await db
           .collection("users")
           .doc(uid)
-          .update({ planning: { anime: item } });
+          .update({ planning: arrayUnion(item) });
       }
       console.log(doc.data()?.planning);
 
@@ -81,12 +90,12 @@ export async function setNewAnime(
         await db
           .collection("users")
           .doc(uid)
-          .update({ completed: { anime: item } });
+          .update({ completed: [item] });
       } else {
         await db
           .collection("users")
           .doc(uid)
-          .update({ completed: { anime: item } });
+          .update({ completed: arrayUnion(item) });
       }
       console.log(doc.data()?.completed);
 
@@ -96,12 +105,12 @@ export async function setNewAnime(
         await db
           .collection("users")
           .doc(uid)
-          .update({ paused: { anime: item } });
+          .update({ paused: [item] });
       } else {
         await db
           .collection("users")
           .doc(uid)
-          .update({ paused: { anime: item } });
+          .update({ paused: arrayUnion(item) });
       }
       console.log(doc.data()?.paused);
 
@@ -111,12 +120,12 @@ export async function setNewAnime(
         await db
           .collection("users")
           .doc(uid)
-          .update({ dropped: { anime: item } });
+          .update({ dropped: [item] });
       } else {
         await db
           .collection("users")
           .doc(uid)
-          .update({ dropped: { anime: item } });
+          .update({ dropped: arrayUnion(item) });
       }
       console.log(doc.data()?.dropped);
 

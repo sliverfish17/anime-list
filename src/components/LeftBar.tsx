@@ -21,6 +21,7 @@ const LeftBar = () => {
           alt="user_photo"
           className={style.user__pic}
         />
+
         <span className={style.user__name}>{user?.displayName}</span>
         <span className={style.user__email}>{user?.email}</span>
         <ul className={style.list}>

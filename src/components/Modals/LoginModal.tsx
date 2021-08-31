@@ -7,6 +7,7 @@ import googleLogo from "../../assets/img/googleLogo.svg";
 import githubLogo from "../../assets/img/githubLogo.svg";
 import { UserLogin } from "../../types/user";
 import { loginCheck } from "../../utils/api";
+import Portal from "./Portal";
 
 interface LoginModalProps {
   active: boolean;
@@ -36,38 +37,44 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   };
 
   return (
-    <div
-      className={active ? style.modal__active : style.modal}
-      onClick={outsideClick}
-    >
+    <Portal>
       <div
-        className={active ? style.modal_content__active : style.modal_content}
+        className={active ? style.modal__active : style.modal}
+        onClick={outsideClick}
       >
-        <div>
-          <h1>Sign in</h1>
-          <hr />
-          <div className={style.methods} onClick={loginGoogle}>
-            <div className={style.round}>
-              <img src={googleLogo} alt="googleLogo" className={style.logos} />
-            </div>
-
-            <span>Login with Google</span>
-          </div>
-          <div className={style.methods} onClick={loginGithub}>
-            <div>
+        <div
+          className={active ? style.modal_content__active : style.modal_content}
+        >
+          <div>
+            <h1>Sign in</h1>
+            <hr />
+            <div className={style.methods} onClick={loginGoogle}>
               <div className={style.round}>
                 <img
-                  src={githubLogo}
+                  src={googleLogo}
                   alt="googleLogo"
                   className={style.logos}
                 />
               </div>
+
+              <span>Login with Google</span>
             </div>
-            <span>Login with GitHub</span>
+            <div className={style.methods} onClick={loginGithub}>
+              <div>
+                <div className={style.round}>
+                  <img
+                    src={githubLogo}
+                    alt="googleLogo"
+                    className={style.logos}
+                  />
+                </div>
+              </div>
+              <span>Login with GitHub</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Portal>
   );
 };
 
