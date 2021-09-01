@@ -11,15 +11,20 @@ const RightBar = () => {
   const { list } = useTypedSelector((state) => state.activeList);
 
   const { setNewAnime } = useActions();
+
   useEffect(() => {
     (async () => {
-      const data: any = await getCurrentUser(user?.uid);
-      const animes = await getAnime(data[list]);
-      animes && setNewAnime(animes);
+      if (user) {
+        const data = await getCurrentUser(user.uid);
+        if (!data) return;
+        const animes = await getAnime(data[list]);
+        if (animes) {
+          setNewAnime(animes);
+        }
+      } else return;
     })();
   }, [list]);
 
-  console.log(items);
   return (
     <div className={style.right}>
       <div className={style.sort}>
@@ -42,7 +47,9 @@ const RightBar = () => {
         </div>
       </div>
 
-      {items.length ? items.map((data) => <RightContent data={data} />) : null}
+      {items.length
+        ? items.map((data) => <RightContent data={data} key={data} />)
+        : null}
     </div>
   );
 };

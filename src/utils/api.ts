@@ -61,8 +61,13 @@ export const idToPromise = (id: number): Promise<ISearch> => {
     .then((data) => data?.data);
 };
 
-export function getAnime(ids: number[]): Promise<ISearch[]> {
-  return Promise.all(ids?.map((id) => idToPromise(id)));
+export async function getAnime(ids: number[] | undefined): Promise<ISearch[]> {
+  if (!ids) return [];
+  return Promise.all(ids.map((id) => idToPromise(id)));
+}
+
+export async function searchAnimeByName(searchQuery: string) {
+  axios.get(`https://api.jikan.moe/v3/search/anime?q=${searchQuery}`);
 }
 
 export async function setNewAnime(
@@ -86,8 +91,8 @@ export async function setNewAnime(
           .doc(uid)
           .update({ current: arrayUnion(item) });
       }
-
       break;
+
     case 1:
       if (doc.data()?.planning.length === 0) {
         await db
@@ -100,8 +105,8 @@ export async function setNewAnime(
           .doc(uid)
           .update({ planning: arrayUnion(item) });
       }
-
       break;
+
     case 2:
       if (doc.data()?.completed.length === 0) {
         await db
@@ -114,8 +119,8 @@ export async function setNewAnime(
           .doc(uid)
           .update({ completed: arrayUnion(item) });
       }
-
       break;
+
     case 3:
       if (doc.data()?.paused.length === 0) {
         await db
@@ -128,8 +133,8 @@ export async function setNewAnime(
           .doc(uid)
           .update({ paused: arrayUnion(item) });
       }
-
       break;
+
     case 4:
       if (doc.data()?.dropped.length === 0) {
         await db
@@ -142,10 +147,10 @@ export async function setNewAnime(
           .doc(uid)
           .update({ dropped: arrayUnion(item) });
       }
-
       break;
+
     default:
-      return doc.data();
+      return;
   }
   return doc.data();
 }

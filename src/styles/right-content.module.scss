@@ -5,11 +5,13 @@
   height: 400px;
   justify-content: flex-start;
   font-size: 36px;
+  transition: 0.8s;
+
   .anime {
     display: flex;
-    padding: 10px 50px 25px 50px;
+    padding: 10px 50px 20px 50px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.8s;
     &__poster_block {
       display: flex;
       flex-direction: column;
@@ -24,16 +26,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      cursor: auto;
     }
     &__title_line {
-      display: inline-block;
-      padding-bottom: 10px;
       width: 100%;
       text-align: center;
+      padding-bottom: 10px;
     }
     &__title {
       font-weight: bold;
-      margin-bottom: 15px;
     }
 
     &__description {
@@ -58,10 +59,10 @@
       margin-bottom: 10px;
     }
   }
-  .anime:hover {
-    background: gray 50%;
-    border-radius: 20px;
-  }
+}
+.wrapper:hover {
+  background: rgba(201, 192, 192, 0.15);
+  border-radius: 20px;
 }
 
 hr {

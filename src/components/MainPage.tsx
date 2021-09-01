@@ -10,9 +10,16 @@ import { useActions } from "../hooks/useAction";
 
 const MainPage: React.FC = () => {
   const { chosen }: TAnime = useTypedSelector((state) => state.shownAnime);
+
   const { hideChosenAnime } = useActions();
 
   const [modal, setModalActive] = useState(false);
+
+  useEffect(() => {
+    if (chosen.title) {
+      toggleModal();
+    }
+  }, [chosen]);
 
   const outsideClick = (e: any) => {
     if (e.target.className === modalStyle.modal__active) {
@@ -29,12 +36,6 @@ const MainPage: React.FC = () => {
   const toggleModal = () => {
     setModalActive((store) => !store);
   };
-
-  useEffect(() => {
-    if (chosen.title) {
-      toggleModal();
-    }
-  }, [chosen]);
 
   return (
     <div className={style.wrapper}>

@@ -4,12 +4,12 @@ import "firebase/compat/firestore";
 
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "anime-8d4be.firebaseapp.com",
-  projectId: "anime-8d4be",
-  storageBucket: "anime-8d4be.appspot.com",
-  messagingSenderId: "810152201336",
-  appId: "1:810152201336:web:202fbd0424f291456b718d",
-  measurementId: "G-PRK95M5GMV",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
 
 const db = firebase.firestore();
