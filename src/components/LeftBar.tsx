@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions } from "../hooks/useAction";
 
 import style from "../styles/main.module.scss";
 import current from "../assets/img/current.png";
@@ -11,7 +12,13 @@ import dropped from "../assets/img/dropped.png";
 const LeftBar = () => {
   const { user } = useTypedSelector((state) => state.user);
 
-  const [choice, setChoice] = useState(0);
+  const { setListNumber } = useActions();
+
+  const [choice, setChoice] = useState("current");
+
+  useEffect(() => {
+    setListNumber(choice);
+  }, [choice]);
 
   return (
     <div className={style.left}>
@@ -26,8 +33,10 @@ const LeftBar = () => {
         <span className={style.user__email}>{user?.email}</span>
         <ul className={style.list}>
           <div
-            onClick={() => setChoice(0)}
-            className={choice === 0 ? style.chosen__active : style.chosen}
+            onClick={() => setChoice("current")}
+            className={
+              choice === "current" ? style.chosen__active : style.chosen
+            }
           >
             <li className={style.list__link}>
               <img src={current} alt="current" className={style.list__icons} />
@@ -35,8 +44,10 @@ const LeftBar = () => {
             </li>
           </div>
           <div
-            onClick={() => setChoice(1)}
-            className={choice === 1 ? style.chosen__active : style.chosen}
+            onClick={() => setChoice("planning")}
+            className={
+              choice === "planning" ? style.chosen__active : style.chosen
+            }
           >
             <li className={style.list__link}>
               <img
@@ -48,8 +59,10 @@ const LeftBar = () => {
             </li>
           </div>
           <div
-            onClick={() => setChoice(2)}
-            className={choice === 2 ? style.chosen__active : style.chosen}
+            onClick={() => setChoice("completed")}
+            className={
+              choice === "completed" ? style.chosen__active : style.chosen
+            }
           >
             <li className={style.list__link}>
               <img
@@ -61,8 +74,10 @@ const LeftBar = () => {
             </li>
           </div>
           <div
-            onClick={() => setChoice(3)}
-            className={choice === 3 ? style.chosen__active : style.chosen}
+            onClick={() => setChoice("paused")}
+            className={
+              choice === "paused" ? style.chosen__active : style.chosen
+            }
           >
             <li className={style.list__link}>
               <img src={paused} alt="paused" className={style.list__icons} />
@@ -70,8 +85,10 @@ const LeftBar = () => {
             </li>
           </div>
           <div
-            onClick={() => setChoice(4)}
-            className={choice === 4 ? style.chosen__active : style.chosen}
+            onClick={() => setChoice("dropped")}
+            className={
+              choice === "dropped" ? style.chosen__active : style.chosen
+            }
           >
             <li className={style.list__link}>
               <img src={dropped} alt="dropped" className={style.list__icons} />

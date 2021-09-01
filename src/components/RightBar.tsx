@@ -1,13 +1,25 @@
+import { useEffect } from "react";
+import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/main.module.scss";
-import { UserState } from "../types/user";
-import { getUserInfo } from "../utils/api";
+import { getAnime, getCurrentUser } from "../utils/api";
+import RightContent from "./RightContent";
 
 const RightBar = () => {
-  const { user }: UserState = useTypedSelector((state) => state.user);
+  const { user } = useTypedSelector((state) => state.user);
+  const { items }: any = useTypedSelector((state) => state.displayedAnime);
+  const { list } = useTypedSelector((state) => state.activeList);
 
-  console.log(getUserInfo(user?.uid).then((e) => e));
+  const { setNewAnime } = useActions();
+  useEffect(() => {
+    (async () => {
+      const data: any = await getCurrentUser(user?.uid);
+      const animes = await getAnime(data[list]);
+      animes && setNewAnime(animes);
+    })();
+  }, [list]);
 
+  console.log(items);
   return (
     <div className={style.right}>
       <div className={style.sort}>
@@ -29,6 +41,8 @@ const RightBar = () => {
           </select>
         </div>
       </div>
+
+      {items.length ? items.map((data) => <RightContent data={data} />) : null}
     </div>
   );
 };

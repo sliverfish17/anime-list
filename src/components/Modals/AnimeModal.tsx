@@ -11,12 +11,14 @@ interface AnimeModalProps {
   active: boolean;
   outsideClick: React.MouseEventHandler<HTMLDivElement>;
   data: TAnime;
+  close: () => void;
 }
 
 const AnimeModal: React.FC<AnimeModalProps> = ({
   data,
   active,
   outsideClick,
+  close,
 }) => {
   const { user }: UserState = useTypedSelector((state) => state.user);
 
@@ -31,13 +33,23 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
         >
           <div className={style.wrapper}>
             <div className={style.anime}>
-              <img
-                className={style.anime__poster}
-                src={data.image_url}
-                alt={`${data.image_url} poster`}
-              />
+              <div className={style.anime__poster_block}>
+                <button
+                  className={style.anime__close_btn}
+                  onClick={() => close()}
+                >
+                  X
+                </button>
+                <img
+                  className={style.anime__poster}
+                  src={data.image_url}
+                  alt={`${data.image_url} poster`}
+                />
+              </div>
               <div className={style.anime__info}>
-                <span className={style.anime__title}>{data.title}</span>
+                <div className={style.anime__title_line}>
+                  <span className={style.anime__title}>{data.title}</span>
+                </div>
                 <span className={style.anime__start}>
                   {data.type === "Anime" || data.type === "TV"
                     ? data.airing
@@ -61,31 +73,46 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
             <hr />
             <div className={style.options}>
               <button
-                onClick={() => setNewAnime(user?.uid, 0, data.mal_id)}
+                onClick={() => {
+                  setNewAnime(user?.uid, 0, data.mal_id);
+                  close();
+                }}
                 className={style.options__btn}
               >
                 Current
               </button>
               <button
-                onClick={() => setNewAnime(user?.uid, 1, data.mal_id)}
+                onClick={() => {
+                  setNewAnime(user?.uid, 1, data.mal_id);
+                  close();
+                }}
                 className={style.options__btn}
               >
                 Planning
               </button>
               <button
-                onClick={() => setNewAnime(user?.uid, 2, data.mal_id)}
+                onClick={() => {
+                  setNewAnime(user?.uid, 2, data.mal_id);
+                  close();
+                }}
                 className={style.options__btn}
               >
                 Completed
               </button>
               <button
-                onClick={() => setNewAnime(user?.uid, 3, data.mal_id)}
+                onClick={() => {
+                  setNewAnime(user?.uid, 3, data.mal_id);
+                  close();
+                }}
                 className={style.options__btn}
               >
                 Paused
               </button>
               <button
-                onClick={() => setNewAnime(user?.uid, 4, data.mal_id)}
+                onClick={() => {
+                  setNewAnime(user?.uid, 4, data.mal_id);
+                  close();
+                }}
                 className={style.options__btn}
               >
                 Dropped

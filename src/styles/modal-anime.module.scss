@@ -60,6 +60,10 @@
   .anime {
     display: flex;
     padding-bottom: 30px;
+    &__poster_block {
+      display: flex;
+      flex-direction: column;
+    }
     &__poster {
       width: 320px;
       height: 455px;
@@ -71,9 +75,29 @@
       flex-direction: column;
       align-items: center;
     }
+    &__title_line {
+      display: inline-block;
+      padding-bottom: 10px;
+      width: 100%;
+      text-align: center;
+    }
     &__title {
       font-weight: bold;
       margin-bottom: 15px;
+    }
+    &__close_btn {
+      font-size: 32px;
+      background-color: #222;
+      width: 46px;
+      height: 40px;
+      border-radius: 20px;
+      margin-top: -45px;
+      margin-left: -40px;
+      margin-bottom: 5px;
+      transition: transform 750ms;
+    }
+    &__close_btn:hover {
+      transform: rotate(360deg);
     }
     &__description {
       display: -webkit-box;
@@ -122,4 +146,14 @@
       width: 50px;
     }
   }
+}
+
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }

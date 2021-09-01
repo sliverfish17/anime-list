@@ -122,10 +122,6 @@
           font-size: 26px;
           line-height: 35px;
           color: #ffffff;
-          transition: transform 250ms;
-        }
-        &__link:hover {
-          transform: translateY(-6px);
         }
 
         &__icons {
@@ -139,7 +135,7 @@
           display: flex;
           justify-content: space-between;
           padding: 5px;
-
+          transition: 250ms;
           &__active {
             padding: 5px;
             display: flex;
@@ -148,6 +144,9 @@
             background: #222222;
             border-radius: 15px;
           }
+        }
+        .chosen:hover {
+          transform: scale(1.05);
         }
       }
     }
@@ -169,6 +168,7 @@
       padding: 15px 0 0 20px;
       display: flex;
       justify-content: space-between;
+      margin-bottom: 60px;
       .search {
         padding: 0 25px 0 25px;
         display: flex;

@@ -21,6 +21,11 @@ const MainPage: React.FC = () => {
     }
   };
 
+  const close = () => {
+    setModalActive(false);
+    hideChosenAnime();
+  };
+
   const toggleModal = () => {
     setModalActive((store) => !store);
   };
@@ -38,6 +43,7 @@ const MainPage: React.FC = () => {
           data={chosen}
           active={modal}
           outsideClick={outsideClick}
+          close={close}
         ></AnimeModal>
       )}
       <LeftBar />

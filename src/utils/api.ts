@@ -1,5 +1,7 @@
+import axios from "axios";
 import { db } from "../firebase";
 import { arrayUnion } from "firebase/firestore";
+import { ISearch } from "../types/service";
 
 export async function createUser(
   displayName: string,
@@ -39,10 +41,28 @@ export async function loginCheck(
   }
 }
 
-export async function getUserInfo(uid: string | undefined) {
-  const userRef = db.collection("users").doc(uid);
-  const doc = await userRef.get();
-  return doc.data();
+export function getCurrentUser(uuid: string | undefined) {
+  if (uuid) {
+    const docRef = db.collection("users").doc(uuid);
+    return docRef
+      .get()
+      .then((doc) => {
+        return doc.data();
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }
+}
+
+export const idToPromise = (id: number): Promise<ISearch> => {
+  return axios
+    .get(`https://api.jikan.moe/v3/anime/${id}`)
+    .then((data) => data?.data);
+};
+
+export function getAnime(ids: number[]): Promise<ISearch[]> {
+  return Promise.all(ids?.map((id) => idToPromise(id)));
 }
 
 export async function setNewAnime(
@@ -52,7 +72,6 @@ export async function setNewAnime(
 ) {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
-  console.log("doc", doc);
 
   switch (list) {
     case 0:
@@ -67,7 +86,6 @@ export async function setNewAnime(
           .doc(uid)
           .update({ current: arrayUnion(item) });
       }
-      console.log(doc.data()?.current);
 
       break;
     case 1:
@@ -82,7 +100,6 @@ export async function setNewAnime(
           .doc(uid)
           .update({ planning: arrayUnion(item) });
       }
-      console.log(doc.data()?.planning);
 
       break;
     case 2:
@@ -97,7 +114,6 @@ export async function setNewAnime(
           .doc(uid)
           .update({ completed: arrayUnion(item) });
       }
-      console.log(doc.data()?.completed);
 
       break;
     case 3:
@@ -112,7 +128,6 @@ export async function setNewAnime(
           .doc(uid)
           .update({ paused: arrayUnion(item) });
       }
-      console.log(doc.data()?.paused);
 
       break;
     case 4:
@@ -127,7 +142,6 @@ export async function setNewAnime(
           .doc(uid)
           .update({ dropped: arrayUnion(item) });
       }
-      console.log(doc.data()?.dropped);
 
       break;
     default:
