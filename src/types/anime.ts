@@ -10,6 +10,8 @@ export enum AnimeActionTypes {
   SHOW_CHOSEN_ANIME = "SHOW_CHOSEN_ANIME",
   HIDE_CHOSEN_ANIME = "HIDE_CHOSEN_ANIME",
   SET_NEW_ANIME = "SET_NEW_ANIME",
+  ADD_NEW_ANIME = "ADD_NEW_ANIME",
+  TEST = "TEST",
 }
 
 interface ShowAnimeAction {
@@ -27,7 +29,22 @@ interface SetNewAnimeAction {
   payload: TAnime;
 }
 
-export type AnimeAction = ShowAnimeAction | HideAnimeAction | SetNewAnimeAction;
+interface AddNewAnimeAction {
+  type: AnimeActionTypes.ADD_NEW_ANIME;
+  payload: TAnime;
+}
+
+interface TestAction {
+  type: AnimeActionTypes.TEST;
+  payload: TAnime;
+}
+
+export type AnimeAction =
+  | ShowAnimeAction
+  | HideAnimeAction
+  | SetNewAnimeAction
+  | AddNewAnimeAction
+  | TestAction;
 
 export interface IAnimeChoice {
   data: {

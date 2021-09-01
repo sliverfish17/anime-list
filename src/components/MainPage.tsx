@@ -11,7 +11,7 @@ import { useActions } from "../hooks/useAction";
 const MainPage: React.FC = () => {
   const { chosen }: TAnime = useTypedSelector((state) => state.shownAnime);
 
-  const { hideChosenAnime } = useActions();
+  const { hideChosenAnime, addNewAnime } = useActions();
 
   const [modal, setModalActive] = useState(false);
 
@@ -22,15 +22,21 @@ const MainPage: React.FC = () => {
   }, [chosen]);
 
   const outsideClick = (e: any) => {
-    if (e.target.className === modalStyle.modal__active) {
+    if (
+      e.target.className === modalStyle.modal__active ||
+      e.target.className === modalStyle.anime__close_btn
+    ) {
       setModalActive(false);
       hideChosenAnime();
     }
   };
 
   const close = () => {
+    console.log("log", chosen);
+
     setModalActive(false);
     hideChosenAnime();
+    addNewAnime(chosen);
   };
 
   const toggleModal = () => {

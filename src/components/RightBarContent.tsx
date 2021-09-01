@@ -5,7 +5,7 @@ interface RightContentProps {
   data: TAnime[];
 }
 
-const RightContent: React.FC<RightContentProps> = ({ data }) => {
+const RightBarContent: React.FC<RightContentProps> = ({ data }) => {
   return (
     <>
       {data.map((info) => (
@@ -47,4 +47,4 @@ const RightContent: React.FC<RightContentProps> = ({ data }) => {
   );
 };
 
-export default RightContent;
+export default RightBarContent;

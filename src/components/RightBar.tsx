@@ -3,9 +3,9 @@ import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/main.module.scss";
 import { getAnime, getCurrentUser } from "../utils/api";
-import RightContent from "./RightContent";
+import RightBarContent from "./RightBarContent";
 
-const RightBar = () => {
+const RightBar: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
   const { items }: any = useTypedSelector((state) => state.displayedAnime);
   const { list } = useTypedSelector((state) => state.activeList);
@@ -48,7 +48,7 @@ const RightBar = () => {
       </div>
 
       {items.length
-        ? items.map((data) => <RightContent data={data} key={data} />)
+        ? items.map((data) => <RightBarContent data={data} key={data} />)
         : null}
     </div>
   );

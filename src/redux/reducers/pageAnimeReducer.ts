@@ -4,7 +4,7 @@ import {
   AnimeAction,
 } from "../../types/anime";
 
-const initialState = {
+const initialState: any = {
   items: [],
 };
 
@@ -17,6 +17,11 @@ const anime = (
       return {
         ...state,
         items: [action.payload],
+      };
+    case AnimeActionTypes.ADD_NEW_ANIME:
+      return {
+        ...state,
+        items: [[...state.items[0], action.payload]],
       };
     default:
       return state;

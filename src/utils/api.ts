@@ -55,19 +55,15 @@ export function getCurrentUser(uuid: string | undefined) {
   }
 }
 
-export const idToPromise = (id: number): Promise<ISearch> => {
+export const idToPromise = (animeId: number): Promise<ISearch> => {
   return axios
-    .get(`https://api.jikan.moe/v3/anime/${id}`)
+    .get(`https://api.jikan.moe/v3/anime/${animeId}`)
     .then((data) => data?.data);
 };
 
 export async function getAnime(ids: number[] | undefined): Promise<ISearch[]> {
   if (!ids) return [];
   return Promise.all(ids.map((id) => idToPromise(id)));
-}
-
-export async function searchAnimeByName(searchQuery: string) {
-  axios.get(`https://api.jikan.moe/v3/search/anime?q=${searchQuery}`);
 }
 
 export async function setNewAnime(
@@ -77,7 +73,6 @@ export async function setNewAnime(
 ) {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
-
   switch (list) {
     case 0:
       if (doc.data()?.current.length === 0) {

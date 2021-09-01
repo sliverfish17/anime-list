@@ -34,12 +34,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
           <div className={style.wrapper}>
             <div className={style.anime}>
               <div className={style.anime__poster_block}>
-                <button
-                  className={style.anime__close_btn}
-                  onClick={() => close()}
-                >
-                  X
-                </button>
+                <button className={style.anime__close_btn}>X</button>
                 <img
                   className={style.anime__poster}
                   src={data.image_url}
@@ -75,6 +70,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               <button
                 onClick={() => {
                   setNewAnime(user?.uid, 0, data.mal_id);
+
                   close();
                 }}
                 className={style.options__btn}
