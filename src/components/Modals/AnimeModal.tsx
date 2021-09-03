@@ -11,7 +11,7 @@ interface AnimeModalProps {
   active: boolean;
   outsideClick: React.MouseEventHandler<HTMLDivElement>;
   data: TAnime;
-  close: () => void;
+  close: (newList: string) => void;
 }
 
 const AnimeModal: React.FC<AnimeModalProps> = ({
@@ -71,7 +71,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
                 onClick={() => {
                   setNewAnime(user?.uid, 0, data.mal_id);
 
-                  close();
+                  close("current");
                 }}
                 className={style.options__btn}
               >
@@ -80,7 +80,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               <button
                 onClick={() => {
                   setNewAnime(user?.uid, 1, data.mal_id);
-                  close();
+                  close("planning");
                 }}
                 className={style.options__btn}
               >
@@ -89,7 +89,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               <button
                 onClick={() => {
                   setNewAnime(user?.uid, 2, data.mal_id);
-                  close();
+                  close("completed");
                 }}
                 className={style.options__btn}
               >
@@ -98,7 +98,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               <button
                 onClick={() => {
                   setNewAnime(user?.uid, 3, data.mal_id);
-                  close();
+                  close("paused");
                 }}
                 className={style.options__btn}
               >
@@ -107,7 +107,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               <button
                 onClick={() => {
                   setNewAnime(user?.uid, 4, data.mal_id);
-                  close();
+                  close("dropped");
                 }}
                 className={style.options__btn}
               >

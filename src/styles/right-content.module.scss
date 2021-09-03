@@ -9,9 +9,11 @@
 
   .anime {
     display: flex;
-    padding: 10px 50px 20px 50px;
+    padding: 10px 50px 15px 50px;
     cursor: pointer;
     transition: 0.8s;
+    cursor: cursor;
+
     &__poster_block {
       display: flex;
       flex-direction: column;
@@ -26,7 +28,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      cursor: auto;
+      cursor: pointer;
     }
     &__title_line {
       width: 100%;
@@ -35,27 +37,28 @@
     }
     &__title {
       font-weight: bold;
+      cursor: text;
     }
 
     &__description {
       display: -webkit-box;
-      -webkit-line-clamp: 8;
+      -webkit-line-clamp: 7;
       -webkit-box-orient: vertical;
-      text-overflow: ellipsis;
       overflow: hidden;
       font-weight: 400;
-      font-size: 19px;
-      line-height: 20px;
-      -ms-text-overflow: ellipsis;
-      -o-text-overflow: ellipsis;
+      font-size: 18px;
+      line-height: 22px;
+      cursor: text;
     }
     &__start {
       font-size: 26px;
       margin-bottom: 15px;
+      cursor: text;
     }
     &__genres {
       font-size: 24px;
       margin-bottom: 10px;
+      cursor: text;
     }
   }
 }

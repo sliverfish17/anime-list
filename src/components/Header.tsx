@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { user } = useTypedSelector((state) => state);
+
   const { setLogOut } = useActions();
 
   const handleLogOut = () => {

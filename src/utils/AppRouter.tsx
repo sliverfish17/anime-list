@@ -4,9 +4,9 @@ import { LOGIN_ROUTE, MAIN_ROUTE } from "../utils/consts";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
 function AppRouter() {
-  const { user } = useTypedSelector((state) => state);
+  const { loggedIn } = useTypedSelector((state) => state.user);
 
-  return user.user ? (
+  return loggedIn ? (
     <Switch>
       {privateRoutes.map(({ path, Component }) => {
         return (

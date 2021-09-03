@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import style from "../styles/main.module.scss";
-import LeftBar from "./LeftBar";
-import RightBar from "./RightBar";
+import LeftBar from "../components/LeftBar";
+import RightBar from "../components/RightBar";
 import modalStyle from "../styles/modal-anime.module.scss";
-import AnimeModal from "./Modals/AnimeModal";
+import AnimeModal from "../components/Modals/AnimeModal";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { TAnime } from "../types/anime";
 import { useActions } from "../hooks/useAction";
 
 const MainPage: React.FC = () => {
   const { chosen }: TAnime = useTypedSelector((state) => state.shownAnime);
+  const { list } = useTypedSelector((state) => state.activeList);
 
   const { hideChosenAnime, addNewAnime } = useActions();
 
@@ -31,12 +32,10 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const close = () => {
-    console.log("log", chosen);
-
+  const close = (newList: string) => {
     setModalActive(false);
     hideChosenAnime();
-    addNewAnime(chosen);
+    if (newList === list) addNewAnime(chosen);
   };
 
   const toggleModal = () => {

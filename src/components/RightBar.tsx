@@ -12,6 +12,8 @@ const RightBar: React.FC = () => {
 
   const { setNewAnime } = useActions();
 
+  console.log(items.map((e) => e));
+
   useEffect(() => {
     (async () => {
       if (user) {
@@ -38,18 +40,15 @@ const RightBar: React.FC = () => {
         </div>
         <div className={style.search}>
           Sort by
-          <select defaultValue="" className={style.search__field} name="" id="">
+          <select defaultValue="" className={style.search__field}>
             <option disabled></option>
-            <option value="Name (A-z)">Name (A-z)</option>
-            <option value="Name (Z-a)">Name (Z-a)</option>
-            <option value="Date added">Date added</option>
+            <option>Name (A-z)</option>
+            <option>Name (Z-a)</option>
+            <option>Date added</option>
           </select>
         </div>
       </div>
-
-      {items.length
-        ? items.map((data) => <RightBarContent data={data} key={data} />)
-        : null}
+      {items.map((data) => data.map((info) => <RightBarContent info={info} />))}
     </div>
   );
 };

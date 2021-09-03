@@ -23,11 +23,7 @@ const LeftBar = () => {
   return (
     <div className={style.left}>
       <div className={style.user}>
-        <img
-          src={user?.photoURL}
-          alt="user_photo"
-          className={style.user__pic}
-        />
+        <img src={user?.photoURL} alt="userPhoto" className={style.user__pic} />
 
         <span className={style.user__name}>{user?.displayName}</span>
         <span className={style.user__email}>{user?.email}</span>

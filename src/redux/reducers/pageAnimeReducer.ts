@@ -6,6 +6,7 @@ import {
 
 const initialState: any = {
   items: [],
+  loading: true,
 };
 
 const anime = (
@@ -17,11 +18,13 @@ const anime = (
       return {
         ...state,
         items: [action.payload],
+        loading: false,
       };
     case AnimeActionTypes.ADD_NEW_ANIME:
       return {
         ...state,
         items: [[...state.items[0], action.payload]],
+        loading: false,
       };
     default:
       return state;
