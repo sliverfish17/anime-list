@@ -1,16 +1,13 @@
 import React from "react";
 import style from "../../styles/modal-anime.module.scss";
 import { TAnime } from "../../types/anime";
-import trash from "../../assets/img/trash-can.png";
-import { setNewAnime } from "../../utils/api";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { UserState } from "../../types/user";
 import Portal from "./Portal";
+import AnimeSet from "./AnimeModalSet";
 
 interface AnimeModalProps {
   active: boolean;
-  outsideClick: React.MouseEventHandler<HTMLDivElement>;
   data: TAnime;
+  outsideClick: React.MouseEventHandler<HTMLDivElement>;
   close: (newList: string) => void;
 }
 
@@ -20,8 +17,6 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
   outsideClick,
   close,
 }) => {
-  const { user }: UserState = useTypedSelector((state) => state.user);
-
   return (
     <Portal>
       <div
@@ -66,57 +61,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               </div>
             </div>
             <hr />
-            <div className={style.options}>
-              <button
-                onClick={() => {
-                  setNewAnime(user?.uid, 0, data.mal_id);
-
-                  close("current");
-                }}
-                className={style.options__btn}
-              >
-                Current
-              </button>
-              <button
-                onClick={() => {
-                  setNewAnime(user?.uid, 1, data.mal_id);
-                  close("planning");
-                }}
-                className={style.options__btn}
-              >
-                Planning
-              </button>
-              <button
-                onClick={() => {
-                  setNewAnime(user?.uid, 2, data.mal_id);
-                  close("completed");
-                }}
-                className={style.options__btn}
-              >
-                Completed
-              </button>
-              <button
-                onClick={() => {
-                  setNewAnime(user?.uid, 3, data.mal_id);
-                  close("paused");
-                }}
-                className={style.options__btn}
-              >
-                Paused
-              </button>
-              <button
-                onClick={() => {
-                  setNewAnime(user?.uid, 4, data.mal_id);
-                  close("dropped");
-                }}
-                className={style.options__btn}
-              >
-                Dropped
-              </button>
-              <button className={style.options__btn}>
-                <img src={trash} alt="trash" className={style.options__icon} />
-              </button>
-            </div>
+            <AnimeSet id={data.mal_id} close={close} />
           </div>
         </div>
       </div>

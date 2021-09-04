@@ -12,8 +12,6 @@ const RightBar: React.FC = () => {
 
   const { setNewAnime } = useActions();
 
-  console.log(items.map((e) => e));
-
   useEffect(() => {
     (async () => {
       if (user) {
