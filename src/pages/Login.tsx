@@ -10,7 +10,7 @@ import girl from "../assets/img/zeroTwo.svg";
 const Login: React.FC = () => {
   const [modal, setModalActive] = useState(false);
 
-  const outsideClick = (e: any) => {
+  const outsideClick = (e) => {
     if (e.target.className === modalStyle.modal__active) {
       setModalActive(false);
     }

@@ -2,12 +2,15 @@ import { useEffect } from "react";
 import { useActions } from "../hooks/useAction";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import style from "../styles/main.module.scss";
+import { DisplayedAnimeState } from "../types/anime";
 import { getAnime, getCurrentUser } from "../utils/api";
 import RightBarContent from "./RightBarContent";
 
 const RightBar: React.FC = () => {
   const { user } = useTypedSelector((state) => state.user);
-  const { items }: any = useTypedSelector((state) => state.displayedAnime);
+  const { items }: DisplayedAnimeState = useTypedSelector(
+    (state) => state.displayedAnime
+  );
   const { list } = useTypedSelector((state) => state.activeList);
 
   const { setNewAnime } = useActions();
@@ -46,7 +49,9 @@ const RightBar: React.FC = () => {
           </select>
         </div>
       </div>
-      {items.map((data) => data.map((info) => <RightBarContent info={info} />))}
+      {items.map((data) =>
+        data.map((info) => <RightBarContent info={info} key={info.mal_id} />)
+      )}
     </div>
   );
 };

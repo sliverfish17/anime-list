@@ -26,6 +26,11 @@ const anime = (
         items: [[...state.items[0], action.payload]],
         loading: false,
       };
+    case AnimeActionTypes.REMOVE_ANIME:
+      return {
+        ...state,
+        items: [[...state.items[0], action.payload]],
+      };
     default:
       return state;
   }

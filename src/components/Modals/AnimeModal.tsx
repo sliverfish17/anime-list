@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "../../styles/modal-anime.module.scss";
 import { TAnime } from "../../types/anime";
 import Portal from "./Portal";
 import AnimeSet from "./AnimeModalSet";
+import { getCurrentUser } from "../../utils/api";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 interface AnimeModalProps {
   active: boolean;
@@ -11,12 +13,39 @@ interface AnimeModalProps {
   close: (newList: string) => void;
 }
 
+export interface IUserLists {
+  current: number[];
+  dropped: number[];
+  paused: number[];
+  planning: number[];
+  completed: number[];
+}
+
 const AnimeModal: React.FC<AnimeModalProps> = ({
   data,
   active,
   outsideClick,
   close,
 }) => {
+  const { user } = useTypedSelector((state) => state.user);
+
+  const [userList, setUserList] = useState<IUserLists>();
+
+  useEffect(() => {
+    if (user?.uid) {
+      getCurrentUser(user.uid)?.then((res) => {
+        const listsData = {
+          current: res?.current,
+          dropped: res?.dropped,
+          paused: res?.paused,
+          planning: res?.planning,
+          completed: res?.completed,
+        };
+        setUserList(listsData);
+      });
+    }
+  }, [user]);
+
   return (
     <Portal>
       <div
@@ -61,7 +90,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               </div>
             </div>
             <hr />
-            <AnimeSet id={data.mal_id} close={close} />
+            <AnimeSet id={data.mal_id} close={close} userList={userList} />
           </div>
         </div>
       </div>

@@ -8,12 +8,14 @@ declare global {
   }
 }
 
-const saveState = (state: any) => {
+const saveState = (state) => {
   try {
     const serialisedState = JSON.stringify(state);
 
     window.localStorage.setItem("app_state", serialisedState);
-  } catch (err) {}
+  } catch (err) {
+    console.log(`Error:${err}`);
+  }
 };
 
 const loadState = () => {

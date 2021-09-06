@@ -3,6 +3,7 @@ import { AnimeAction } from "../../types/anime";
 
 const initialState = {
   chosen: [],
+  displayed: false,
 };
 
 const anime = (state = initialState, action: AnimeAction): ChosenAnimeState => {
@@ -11,6 +12,7 @@ const anime = (state = initialState, action: AnimeAction): ChosenAnimeState => {
       return {
         ...state,
         chosen: action.payload,
+        displayed: true,
       };
     case AnimeActionTypes.HIDE_CHOSEN_ANIME:
       return initialState;

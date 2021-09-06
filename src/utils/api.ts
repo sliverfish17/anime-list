@@ -1,9 +1,9 @@
 import axios from "axios";
 import { db } from "../firebase";
-import { arrayUnion } from "firebase/firestore";
+import { arrayUnion, arrayRemove } from "firebase/firestore";
 import { ISearch } from "../types/service";
 
-export async function createUser(
+async function createUser(
   displayName: string,
   email: string,
   photoURL: string,
@@ -66,6 +66,25 @@ export async function getAnime(ids: number[] | undefined): Promise<ISearch[]> {
   return Promise.all(ids.map((id) => idToPromise(id)));
 }
 
+async function newAnimeCheck(
+  uid: string | undefined,
+  name: string,
+  item: number,
+  doc: any
+) {
+  if (doc.data()?.current.length === 0) {
+    await db
+      .collection("users")
+      .doc(uid)
+      .update({ [name]: [item] });
+  } else {
+    await db
+      .collection("users")
+      .doc(uid)
+      .update({ [name]: arrayUnion(item) });
+  }
+}
+
 export async function setNewAnime(
   uid: string | undefined,
   list: number,
@@ -73,79 +92,44 @@ export async function setNewAnime(
 ) {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
-  switch (list) {
-    case 0:
-      if (doc.data()?.current.length === 0) {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ current: [item] });
-      } else {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ current: arrayUnion(item) });
-      }
+  const names = ["current", "planning", "completed", "paused", "dropped"];
+  for (let i = 0; i < names.length; i++) {
+    if (list === i) {
+      await newAnimeCheck(uid, names[i], item, doc);
       break;
-
-    case 1:
-      if (doc.data()?.planning.length === 0) {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ planning: [item] });
-      } else {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ planning: arrayUnion(item) });
-      }
-      break;
-
-    case 2:
-      if (doc.data()?.completed.length === 0) {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ completed: [item] });
-      } else {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ completed: arrayUnion(item) });
-      }
-      break;
-
-    case 3:
-      if (doc.data()?.paused.length === 0) {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ paused: [item] });
-      } else {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ paused: arrayUnion(item) });
-      }
-      break;
-
-    case 4:
-      if (doc.data()?.dropped.length === 0) {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ dropped: [item] });
-      } else {
-        await db
-          .collection("users")
-          .doc(uid)
-          .update({ dropped: arrayUnion(item) });
-      }
-      break;
-
-    default:
-      return;
+    }
   }
+
   return doc.data();
+}
+
+export function transferAnime(
+  animeId: number,
+  oldList: string,
+  newList: any,
+  uid: string | undefined
+) {
+  db.collection("users")
+    .doc(uid)
+    .get()
+    .then((doc) => {
+      const userArr = doc.data();
+      if (userArr) {
+        console.log(userArr);
+        userArr[oldList] = userArr[oldList].filter((e) => e !== animeId);
+        userArr[newList].push(animeId);
+        db.collection("users").doc(uid).set(userArr);
+      }
+    });
+}
+
+export async function deleteAnime(
+  uid: string | undefined,
+  item: number,
+  name: string
+) {
+  await db
+    .collection("users")
+    .doc(uid)
+    .update({ [name]: arrayRemove(item) });
 }

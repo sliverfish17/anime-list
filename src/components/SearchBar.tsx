@@ -3,13 +3,13 @@ import axios from "axios";
 import { ISearch, TResults } from "../types/service";
 import style from "../styles/header.module.scss";
 import { useActions } from "../hooks/useAction";
-import { IAnimeChoice } from "../types/anime";
+import { ChosenAnimeState, IAnimeChoice } from "../types/anime";
 
 const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchArray, setSearchArray]: any[] = useState([]);
+  const [searchArray, setSearchArray] = useState<TResults[]>();
   const [chosenAnime, setChosenAnime] = useState<null | number>(null);
-  const [dispatchedAnime, setDispatchedAnime]: any[] = useState([]);
+  const [dispatchedAnime, setDispatchedAnime] = useState<ChosenAnimeState>();
 
   const { showChosenAnime } = useActions();
 
@@ -32,7 +32,9 @@ const SearchBar: React.FC = () => {
         .get(`https://api.jikan.moe/v3/anime/${chosenAnime}`)
         .then((response: IAnimeChoice) => {
           setDispatchedAnime(showChosenAnime(response.data).payload);
-        });
+          setChosenAnime(null);
+        })
+        .catch((error) => console.log(error));
     }
   }, [chosenAnime]);
 
@@ -54,7 +56,7 @@ const SearchBar: React.FC = () => {
             : style.search_popup__active
         }
       >
-        {searchArray.map((obj: TResults) => (
+        {searchArray?.map((obj: TResults) => (
           <li
             className={style.search_popup__li}
             key={obj.mal_id}

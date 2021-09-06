@@ -22,7 +22,7 @@ const MainPage: React.FC = () => {
     }
   }, [chosen]);
 
-  const outsideClick = (e: any) => {
+  const outsideClick = (e) => {
     if (
       e.target.className === modalStyle.modal__active ||
       e.target.className === modalStyle.anime__close_btn
@@ -32,7 +32,7 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const close = (newList: string) => {
+  const close = (newList: any) => {
     setModalActive(false);
     hideChosenAnime();
     if (newList === list) addNewAnime(chosen);

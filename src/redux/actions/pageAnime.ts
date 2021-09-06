@@ -11,7 +11,7 @@ export const addNewAnime = (anime: TAnime) => ({
   payload: anime,
 });
 
-export const testAnime = (anime: any) => ({
-  type: "TEST",
+export const removeAnime = (anime: TAnime) => ({
+  type: "REMOVE_ANIME",
   payload: anime,
 });

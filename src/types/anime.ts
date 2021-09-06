@@ -1,9 +1,10 @@
 export interface ChosenAnimeState {
   chosen: IAnimeChoice[];
+  displayed: boolean;
 }
 
 export interface DisplayedAnimeState {
-  items: TAnime[];
+  items: TAnime[][];
 }
 
 export enum AnimeActionTypes {
@@ -11,12 +12,13 @@ export enum AnimeActionTypes {
   HIDE_CHOSEN_ANIME = "HIDE_CHOSEN_ANIME",
   SET_NEW_ANIME = "SET_NEW_ANIME",
   ADD_NEW_ANIME = "ADD_NEW_ANIME",
-  TEST = "TEST",
+  REMOVE_ANIME = "REMOVE_ANIME",
 }
 
 interface ShowAnimeAction {
   type: AnimeActionTypes.SHOW_CHOSEN_ANIME;
   payload: IAnimeChoice[];
+  displayed: boolean;
 }
 
 interface HideAnimeAction {
@@ -34,8 +36,8 @@ interface AddNewAnimeAction {
   payload: TAnime;
 }
 
-interface TestAction {
-  type: AnimeActionTypes.TEST;
+interface RemoveAnime {
+  type: AnimeActionTypes.REMOVE_ANIME;
   payload: TAnime;
 }
 
@@ -44,7 +46,7 @@ export type AnimeAction =
   | HideAnimeAction
   | SetNewAnimeAction
   | AddNewAnimeAction
-  | TestAction;
+  | RemoveAnime;
 
 export interface IAnimeChoice {
   data: {
@@ -55,6 +57,7 @@ export interface IAnimeChoice {
     premiered: string;
     title: string;
     chosen: IAnimeChoice[];
+    displayed: boolean;
   };
 }
 

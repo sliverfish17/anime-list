@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../hooks/useAction";
 import style from "../styles/right-content.module.scss";
-import { IAnimeChoice, TAnime } from "../types/anime";
+import { ChosenAnimeState, IAnimeChoice, TAnime } from "../types/anime";
 
 interface RightContentProps {
   info: TAnime;
@@ -11,7 +11,7 @@ interface RightContentProps {
 const RightBarContent: React.FC<RightContentProps> = ({ info }) => {
   const { showChosenAnime } = useActions();
 
-  const [dispatchedAnime, setDispatchedAnime]: any[] = useState([]);
+  const [dispatchedAnime, setDispatchedAnime] = useState<ChosenAnimeState>();
   const [chosenAnime, setChosenAnime] = useState<null | number>(null);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const RightBarContent: React.FC<RightContentProps> = ({ info }) => {
         .get(`https://api.jikan.moe/v3/anime/${chosenAnime}`)
         .then((response: IAnimeChoice) => {
           setDispatchedAnime(showChosenAnime(response.data).payload);
+          setChosenAnime(null);
         });
     }
   }, [chosenAnime]);
