@@ -23,17 +23,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const loginGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const { user }: UserLogin = await auth.signInWithPopup(provider);
-    setLoggedIn();
-    setUserData(user);
     loginCheck(user?.displayName, user?.email, user?.photoURL, user?.uid);
+    setLoggedIn();
   };
 
   const loginGithub = async () => {
     const provider = new firebase.auth.GithubAuthProvider();
     const { user }: UserLogin = await auth.signInWithPopup(provider);
-    setLoggedIn();
     setUserData(user);
     loginCheck(user?.displayName, user?.email, user?.photoURL, user?.uid);
+    setLoggedIn();
   };
 
   return (

@@ -1,7 +1,8 @@
+import { IAnimeChoice } from "./../../types/anime";
 import { AnimeActionTypes, ChosenAnimeState } from "../../types/anime";
 import { AnimeAction } from "../../types/anime";
 
-const initialState = {
+const initialState: ChosenAnimeState = {
   chosen: [],
   displayed: false,
 };

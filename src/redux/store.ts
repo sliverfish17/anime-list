@@ -8,19 +8,13 @@ declare global {
   }
 }
 
-const saveState = (state) => {
-  try {
-    const serialisedState = JSON.stringify(state);
-
-    window.localStorage.setItem("app_state", serialisedState);
-  } catch (err) {
-    console.log(`Error:${err}`);
-  }
+const saveState = (state: string | undefined) => {
+  if (state) localStorage.setItem("uid", state);
 };
 
 const loadState = () => {
   try {
-    const serialisedState = window.localStorage.getItem("app_state");
+    const serialisedState = window.localStorage.getItem("uid");
     if (!serialisedState) return undefined;
 
     return JSON.parse(serialisedState);
@@ -41,7 +35,7 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  saveState(store.getState());
+  saveState(store.getState().userInfo.user?.uid);
 });
 
 export default store;

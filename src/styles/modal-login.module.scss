@@ -19,6 +19,12 @@
     background: #333333;
     border-radius: 50px;
     &__active {
+      -webkit-animation-name: fadeIn;
+      animation-name: fadeIn;
+      -webkit-animation-duration: 0.5s;
+      animation-duration: 0.5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -88,4 +94,21 @@ h1 {
   margin-bottom: 20px;
   font-weight: 700;
   font-size: 42px;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

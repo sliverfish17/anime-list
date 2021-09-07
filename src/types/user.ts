@@ -1,6 +1,7 @@
 export interface UserState {
   user: TUser | null;
   loggedIn: boolean;
+  isLoading: boolean;
 }
 
 export type TUser = {
@@ -22,6 +23,7 @@ export enum UserActionTypes {
   SET_USER = "SET_USER",
   SET_USER_LOGGED_IN = "SET_USER_LOGGED_IN",
   SET_USER_LOGGED_OUT = "SET_USER_LOGGED_OUT",
+  SET_USER_LOADING = "SET_USER_LOADING",
 }
 
 interface SetUserAction {
@@ -38,4 +40,13 @@ interface FetchUserLoggedOut {
   type: UserActionTypes.SET_USER_LOGGED_OUT;
 }
 
-export type UserAction = SetUserAction | FetchUserLoggedIn | FetchUserLoggedOut;
+interface FetchSetUserLoading {
+  type: UserActionTypes.SET_USER_LOADING;
+  payload: boolean;
+}
+
+export type UserAction =
+  | SetUserAction
+  | FetchUserLoggedIn
+  | FetchUserLoggedOut
+  | FetchSetUserLoading;

@@ -27,7 +27,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
   outsideClick,
   close,
 }) => {
-  const { user } = useTypedSelector((state) => state.user);
+  const { user } = useTypedSelector((state) => state.userInfo);
 
   const [userList, setUserList] = useState<IUserLists>();
 
@@ -90,7 +90,13 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
               </div>
             </div>
             <hr />
-            <AnimeSet id={data.mal_id} close={close} userList={userList} />
+            <AnimeSet
+              user={user}
+              id={data.mal_id}
+              close={close}
+              userList={userList}
+              outsideClick={outsideClick}
+            />
           </div>
         </div>
       </div>

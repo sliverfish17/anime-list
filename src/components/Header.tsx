@@ -4,7 +4,7 @@ import style from "../styles/header.module.scss";
 import SearchBar from "./SearchBar";
 
 const Header = () => {
-  const { user } = useTypedSelector((state) => state);
+  const { userInfo } = useTypedSelector((state) => state);
 
   const { setLogOut } = useActions();
 
@@ -16,7 +16,7 @@ const Header = () => {
     <div className={style.header}>
       {
         <>
-          {!user.user ? (
+          {!userInfo.user ? (
             <div className={style.logoBlock}>
               <div className={style.logo}></div>
               <span>AniList</span>
@@ -27,7 +27,7 @@ const Header = () => {
               <span>AniList</span>
               <SearchBar />
               <img
-                src={user?.user?.photoURL}
+                src={userInfo.user?.photoURL}
                 alt="userPhoto"
                 className={style.picture}
               />

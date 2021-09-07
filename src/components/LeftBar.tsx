@@ -10,7 +10,7 @@ import paused from "../assets/img/paused.png";
 import dropped from "../assets/img/dropped.png";
 
 const LeftBar = () => {
-  const { user } = useTypedSelector((state) => state.user);
+  const { user } = useTypedSelector((state) => state.userInfo);
 
   const { setListNumber } = useActions();
 

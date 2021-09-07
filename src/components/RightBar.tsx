@@ -7,7 +7,7 @@ import { getAnime, getCurrentUser } from "../utils/api";
 import RightBarContent from "./RightBarContent";
 
 const RightBar: React.FC = () => {
-  const { user } = useTypedSelector((state) => state.user);
+  const { user } = useTypedSelector((state) => state.userInfo);
   const { items }: DisplayedAnimeState = useTypedSelector(
     (state) => state.displayedAnime
   );

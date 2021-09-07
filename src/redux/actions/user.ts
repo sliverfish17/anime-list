@@ -10,6 +10,11 @@ export const setUserData = (user: UserState | null) => ({
   payload: user,
 });
 
+export const setUserLoading = (isLoading: boolean) => ({
+  type: "SET_USER_LOADING",
+  payload: isLoading,
+});
+
 export const setLogOut = () => ({
   type: "SET_USER_LOGGED_OUT",
 });

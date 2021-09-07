@@ -1,32 +1,35 @@
 import React from "react";
 import trash from "../../assets/img/trash-can.png";
-import { deleteAnime, setNewAnime } from "../../utils/api";
+import { deleteAnime, setNewAnime, transferAnime } from "../../utils/api";
 import style from "../../styles/modal-anime.module.scss";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { UserState } from "../../types/user";
+import { TUser } from "../../types/user";
 import { IUserLists } from "./AnimeModal";
+import { useActions } from "../../hooks/useAction";
 
 interface AnimeSetProps {
   close: (newList: string) => void;
   id: number;
   userList?: IUserLists;
+  outsideClick: React.MouseEventHandler<HTMLDivElement>;
+  user: TUser | null;
 }
 
-const AnimeSet: React.FC<AnimeSetProps> = ({ close, id, userList }) => {
-  const { user }: UserState = useTypedSelector((state) => state.user);
+const AnimeSet: React.FC<AnimeSetProps> = ({
+  outsideClick,
+  close,
+  id,
+  userList,
+  user,
+}) => {
   const { list } = useTypedSelector((state) => state.activeList);
+  const { removeAnime } = useActions();
 
   const findActiveList = (key: string): boolean => {
     if (userList) {
-      return !!userList![key].find((e) => +e === id);
+      return !!userList![key].find((e: number) => e === id);
     }
     return false;
-  };
-
-  const activeCheck = (list) => {
-    if (userList?.[list].filter((e) => e === id)) {
-      console.log("found");
-    } else console.log("not found");
   };
 
   return (
@@ -44,13 +47,15 @@ const AnimeSet: React.FC<AnimeSetProps> = ({ close, id, userList }) => {
         Current
       </button>
       {/* <button
-        onClick={() => transferAnime(id, list, list, user?.uid)}
+        onClick={() => {
+          removeAnime(id);
+          transferAnime(id, list, "paused", user?.uid);
+        }}
       >
         Transfer
       </button> */}
       <button
         onClick={() => {
-          activeCheck(1);
           setNewAnime(user?.uid, 1, id);
 
           close("planning");
@@ -98,6 +103,7 @@ const AnimeSet: React.FC<AnimeSetProps> = ({ close, id, userList }) => {
       <button
         className={style.options__btn}
         onClick={() => {
+          removeAnime(id);
           deleteAnime(user?.uid, id, list);
         }}
       >

@@ -1,10 +1,11 @@
+import { TList } from "./../../types/list";
 import { ListAction, ListActionTypes } from "../../types/list";
 
-const initialState = {
+const initialState: TList = {
   list: 0,
 };
 
-const anime = (state = initialState, action: ListAction) => {
+const animeList = (state = initialState, action: ListAction) => {
   switch (action.type) {
     case ListActionTypes.SET_LIST:
       return {
@@ -16,4 +17,4 @@ const anime = (state = initialState, action: ListAction) => {
   }
 };
 
-export default anime;
+export default animeList;

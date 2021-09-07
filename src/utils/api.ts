@@ -1,3 +1,4 @@
+import { TUser } from "./../types/user";
 import axios from "axios";
 import { db } from "../firebase";
 import { arrayUnion, arrayRemove } from "firebase/firestore";
@@ -11,10 +12,10 @@ async function createUser(
 ) {
   try {
     await db.collection("users").doc(uid).set({
-      id: uid,
-      name: displayName,
+      uid: uid,
+      displayName: displayName,
       email: email,
-      photo: photoURL,
+      photoURL: photoURL,
       current: [],
       planning: [],
       completed: [],
@@ -38,6 +39,17 @@ export async function loginCheck(
     createUser(displayName, email, photoURL, uid);
   } else {
     return doc.data();
+  }
+}
+
+export async function loginAfterReload() {
+  if (localStorage.getItem("uid")) {
+    const userRef = db.collection("users").doc(localStorage.getItem("uid")!);
+    const doc = await userRef.get();
+    if (doc.exists) {
+      const { photoURL, displayName, email, uid } = doc.data() as TUser;
+      return { photoURL, displayName, email, uid };
+    }
   }
 }
 
@@ -92,10 +104,10 @@ export async function setNewAnime(
 ) {
   const userRef = db.collection("users").doc(uid);
   const doc = await userRef.get();
-  const names = ["current", "planning", "completed", "paused", "dropped"];
-  for (let i = 0; i < names.length; i++) {
+  const categories = ["current", "planning", "completed", "paused", "dropped"];
+  for (let i = 0; i < categories.length; i++) {
     if (list === i) {
-      await newAnimeCheck(uid, names[i], item, doc);
+      await newAnimeCheck(uid, categories[i], item, doc);
       break;
     }
   }
@@ -105,8 +117,8 @@ export async function setNewAnime(
 
 export function transferAnime(
   animeId: number,
-  oldList: string,
-  newList: any,
+  currentList: string,
+  newList: string,
   uid: string | undefined
 ) {
   db.collection("users")
@@ -116,7 +128,9 @@ export function transferAnime(
       const userArr = doc.data();
       if (userArr) {
         console.log(userArr);
-        userArr[oldList] = userArr[oldList].filter((e) => e !== animeId);
+        userArr[currentList] = userArr[currentList].filter(
+          (e) => e !== animeId
+        );
         userArr[newList].push(animeId);
         db.collection("users").doc(uid).set(userArr);
       }

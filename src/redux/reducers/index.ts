@@ -5,15 +5,16 @@ import pageAnimeReducer from "./pageAnimeReducer";
 import listReducer from "./listReducer";
 
 const appReducer = combineReducers({
-  user: userReducer,
+  userInfo: userReducer,
   shownAnime: chosenAnimeReducer,
   displayedAnime: pageAnimeReducer,
   activeList: listReducer,
 });
 
-export const rootReducer = (state: any, action: any) => {
+export const rootReducer = (state, action) => {
   if (action.type === "SET_USER_LOGGED_OUT") {
     state = undefined;
+    localStorage.clear();
   }
   return appReducer(state, action);
 };

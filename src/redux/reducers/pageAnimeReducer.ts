@@ -27,10 +27,10 @@ const anime = (
         loading: false,
       };
     case AnimeActionTypes.REMOVE_ANIME:
-      return {
-        ...state,
-        items: [[...state.items[0], action.payload]],
-      };
+      const updatedArray = state.items[0].filter(
+        (item) => item.mal_id !== action.payload
+      );
+      return { ...state, items: [updatedArray] };
     default:
       return state;
   }

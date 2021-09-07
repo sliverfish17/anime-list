@@ -19,3 +19,33 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.loading {
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  background: #222;
+}
+
+.loader {
+  border-top: 16px solid #ff6766;
+  border-radius: 70%;
+  width: 400px;
+  height: 400px;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 30px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
