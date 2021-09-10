@@ -10,7 +10,7 @@ export interface DisplayedAnimeState {
 export enum AnimeActionTypes {
   SHOW_CHOSEN_ANIME = "SHOW_CHOSEN_ANIME",
   HIDE_CHOSEN_ANIME = "HIDE_CHOSEN_ANIME",
-  SET_NEW_ANIME = "SET_NEW_ANIME",
+  SET_ANIME_LIST = "SET_ANIME_LIST",
   ADD_NEW_ANIME = "ADD_NEW_ANIME",
   REMOVE_ANIME = "REMOVE_ANIME",
 }
@@ -26,8 +26,8 @@ interface HideAnimeAction {
   payload: [];
 }
 
-interface SetNewAnimeAction {
-  type: AnimeActionTypes.SET_NEW_ANIME;
+interface SetAnimeListAction {
+  type: AnimeActionTypes.SET_ANIME_LIST;
   payload: TAnime;
 }
 
@@ -44,7 +44,7 @@ interface RemoveAnime {
 export type AnimeAction =
   | ShowAnimeAction
   | HideAnimeAction
-  | SetNewAnimeAction
+  | SetAnimeListAction
   | AddNewAnimeAction
   | RemoveAnime;
 

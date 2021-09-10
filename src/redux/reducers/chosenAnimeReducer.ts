@@ -1,4 +1,3 @@
-import { IAnimeChoice } from "./../../types/anime";
 import { AnimeActionTypes, ChosenAnimeState } from "../../types/anime";
 import { AnimeAction } from "../../types/anime";
 

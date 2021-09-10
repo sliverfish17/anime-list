@@ -1,14 +1,14 @@
 export enum ListActionTypes {
-  SET_LIST = "SET_LIST",
+  SET_CHOSEN_LIST = "SET_CHOSEN_LIST",
 }
 
 export type TList = {
-  list: number;
+  list: string;
 };
 
-interface SetListAction {
-  type: ListActionTypes.SET_LIST;
+interface SetChosenListAction {
+  type: ListActionTypes.SET_CHOSEN_LIST;
   payload: TList;
 }
 
-export type ListAction = SetListAction;
+export type ListAction = SetChosenListAction;

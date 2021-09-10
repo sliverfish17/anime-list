@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import trash from "../../assets/img/trash-can.png";
 import { deleteAnime, setNewAnime, transferAnime } from "../../utils/api";
 import style from "../../styles/modal-anime.module.scss";
@@ -8,7 +8,7 @@ import { IUserLists } from "./AnimeModal";
 import { useActions } from "../../hooks/useAction";
 
 interface AnimeSetProps {
-  close: (newList: string) => void;
+  closeAndAdd: (newList: string) => void;
   id: number;
   userList?: IUserLists;
   outsideClick: React.MouseEventHandler<HTMLDivElement>;
@@ -17,13 +17,14 @@ interface AnimeSetProps {
 
 const AnimeSet: React.FC<AnimeSetProps> = ({
   outsideClick,
-  close,
+  closeAndAdd,
   id,
   userList,
   user,
 }) => {
   const { list } = useTypedSelector((state) => state.activeList);
   const { removeAnime } = useActions();
+  const [activeList, setActiveList] = useState<string>();
 
   const findActiveList = (key: string): boolean => {
     if (userList) {
@@ -32,71 +33,124 @@ const AnimeSet: React.FC<AnimeSetProps> = ({
     return false;
   };
 
+  const addOrChange = () => {
+    if (findActiveList("current")) {
+      setActiveList("current");
+    }
+    if (findActiveList("planning")) {
+      setActiveList("planning");
+    }
+    if (findActiveList("completed")) {
+      setActiveList("completed");
+    }
+    if (findActiveList("paused")) {
+      setActiveList("paused");
+    }
+    if (findActiveList("dropped")) {
+      setActiveList("dropped");
+    }
+  };
+
+  useEffect(() => {
+    addOrChange();
+  }, [findActiveList]);
+
   return (
     <div className={style.options}>
       <button
         id="current"
         onClick={() => {
-          setNewAnime(user?.uid, 0, id);
-          close("current");
+          if (!activeList) {
+            setNewAnime(user?.uid, 0, id);
+            closeAndAdd("current");
+          } else {
+            removeAnime(id);
+            transferAnime(id, activeList, "current", user?.uid);
+          }
         }}
-        className={`${style.options__btn} ${
-          findActiveList("current") ? style.options__btn_active : ""
-        }`}
+        className={
+          findActiveList("current")
+            ? `${style.options__btn} ${style.options__btn_active}`
+            : style.options__btn
+        }
       >
         Current
       </button>
-      {/* <button
-        onClick={() => {
-          removeAnime(id);
-          transferAnime(id, list, "paused", user?.uid);
-        }}
-      >
-        Transfer
-      </button> */}
-      <button
-        onClick={() => {
-          setNewAnime(user?.uid, 1, id);
 
-          close("planning");
+      <button
+        id="planning"
+        onClick={() => {
+          if (!activeList) {
+            setNewAnime(user?.uid, 1, id);
+            closeAndAdd("planning");
+          } else {
+            removeAnime(id);
+            transferAnime(id, activeList, "planning", user?.uid);
+          }
         }}
-        className={`${style.options__btn} ${
-          findActiveList("planning") ? style.options__btn_active : ""
-        }`}
+        className={
+          findActiveList("planning")
+            ? `${style.options__btn} ${style.options__btn_active}`
+            : style.options__btn
+        }
       >
         Planning
       </button>
       <button
         id="completed"
         onClick={() => {
-          setNewAnime(user?.uid, 2, id);
-          close("completed");
+          if (!activeList) {
+            setNewAnime(user?.uid, 2, id);
+            closeAndAdd("completed");
+          } else {
+            removeAnime(id);
+            transferAnime(id, activeList, "completed", user?.uid);
+          }
         }}
-        className={`${style.options__btn} ${
-          findActiveList("completed") ? style.options__btn_active : ""
-        }`}
+        className={
+          findActiveList("completed")
+            ? `${style.options__btn} ${style.options__btn_active}`
+            : style.options__btn
+        }
       >
         Completed
       </button>
       <button
+        id="paused"
         onClick={() => {
-          setNewAnime(user?.uid, 3, id);
-          close("paused");
+          if (!activeList) {
+            setNewAnime(user?.uid, 3, id);
+            closeAndAdd("paused");
+          } else {
+            removeAnime(id);
+            transferAnime(id, activeList, "paused", user?.uid);
+          }
         }}
-        className={`${style.options__btn} ${
-          findActiveList("paused") ? style.options__btn_active : ""
-        }`}
+        className={
+          findActiveList("paused")
+            ? `${style.options__btn} ${style.options__btn_active}`
+            : style.options__btn
+        }
       >
         Paused
       </button>
       <button
+        id="dropped"
         onClick={() => {
-          setNewAnime(user?.uid, 4, id);
-          close("dropped");
+          if (!activeList) {
+            setNewAnime(user?.uid, 4, id);
+            closeAndAdd("dropped");
+          } else {
+            removeAnime(id);
+
+            transferAnime(id, activeList, "dropped", user?.uid);
+          }
         }}
-        className={`${style.options__btn} ${
-          findActiveList("dropped") ? style.options__btn_active : ""
-        }`}
+        className={
+          findActiveList("dropped")
+            ? `${style.options__btn} ${style.options__btn_active}`
+            : style.options__btn
+        }
       >
         Dropped
       </button>

@@ -12,12 +12,12 @@ import dropped from "../assets/img/dropped.png";
 const LeftBar = () => {
   const { user } = useTypedSelector((state) => state.userInfo);
 
-  const { setListNumber } = useActions();
+  const { setChosenList } = useActions();
 
   const [choice, setChoice] = useState("current");
 
   useEffect(() => {
-    setListNumber(choice);
+    setChosenList(choice);
   }, [choice]);
 
   return (

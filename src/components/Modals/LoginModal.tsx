@@ -23,6 +23,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const loginGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     const { user }: UserLogin = await auth.signInWithPopup(provider);
+    setUserData(user);
     loginCheck(user?.displayName, user?.email, user?.photoURL, user?.uid);
     setLoggedIn();
   };

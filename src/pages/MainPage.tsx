@@ -6,10 +6,11 @@ import modalStyle from "../styles/modal-anime.module.scss";
 import AnimeModal from "../components/Modals/AnimeModal";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useAction";
+import { TList } from "../types/list";
 
 const MainPage: React.FC = () => {
   const { chosen }: any = useTypedSelector((state) => state.shownAnime);
-  const { list } = useTypedSelector((state) => state.activeList);
+  const { list }: TList = useTypedSelector((state) => state.activeList);
 
   const { hideChosenAnime, addNewAnime } = useActions();
 
@@ -25,14 +26,15 @@ const MainPage: React.FC = () => {
     if (
       e.target.className === modalStyle.modal__active ||
       e.target.className === modalStyle.anime__close_btn ||
-      e.target.className === modalStyle.options__icon
+      e.target.className === modalStyle.options__icon ||
+      e.target.className === modalStyle.options__btn
     ) {
       setModalActive(false);
       hideChosenAnime();
     }
   };
 
-  const close = (newList: any) => {
+  const closeAndAdd = (newList: string) => {
     setModalActive(false);
     hideChosenAnime();
     if (newList === list) addNewAnime(chosen);
@@ -49,7 +51,7 @@ const MainPage: React.FC = () => {
           data={chosen}
           active={modal}
           outsideClick={outsideClick}
-          close={close}
+          closeAndAdd={closeAndAdd}
         ></AnimeModal>
       )}
       <LeftBar />

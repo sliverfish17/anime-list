@@ -118,7 +118,7 @@ export async function setNewAnime(
 export function transferAnime(
   animeId: number,
   currentList: string,
-  newList: string,
+  newList: any,
   uid: string | undefined
 ) {
   db.collection("users")
@@ -127,7 +127,6 @@ export function transferAnime(
     .then((doc) => {
       const userArr = doc.data();
       if (userArr) {
-        console.log(userArr);
         userArr[currentList] = userArr[currentList].filter(
           (e) => e !== animeId
         );

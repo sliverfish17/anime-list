@@ -14,7 +14,7 @@ const anime = (
   action: AnimeAction
 ): DisplayedAnimeState => {
   switch (action.type) {
-    case AnimeActionTypes.SET_NEW_ANIME:
+    case AnimeActionTypes.SET_ANIME_LIST:
       return {
         ...state,
         items: [action.payload],

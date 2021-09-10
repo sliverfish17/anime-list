@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { useActions } from "../hooks/useAction";
-import style from "../styles/right-content.module.scss";
 import { ChosenAnimeState, IAnimeChoice, TAnime } from "../types/anime";
+import style from "../styles/right-content.module.scss";
 
 interface RightContentProps {
   info: TAnime;

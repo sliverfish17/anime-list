@@ -10,7 +10,7 @@ interface AnimeModalProps {
   active: boolean;
   data: TAnime;
   outsideClick: React.MouseEventHandler<HTMLDivElement>;
-  close: (newList: string) => void;
+  closeAndAdd: (newList: string) => void;
 }
 
 export interface IUserLists {
@@ -25,7 +25,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
   data,
   active,
   outsideClick,
-  close,
+  closeAndAdd,
 }) => {
   const { user } = useTypedSelector((state) => state.userInfo);
 
@@ -93,7 +93,7 @@ const AnimeModal: React.FC<AnimeModalProps> = ({
             <AnimeSet
               user={user}
               id={data.mal_id}
-              close={close}
+              closeAndAdd={closeAndAdd}
               userList={userList}
               outsideClick={outsideClick}
             />

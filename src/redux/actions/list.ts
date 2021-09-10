@@ -1,4 +1,4 @@
-export const setListNumber = (list: string) => ({
-  type: "SET_LIST",
+export const setChosenList = (list: string) => ({
+  type: "SET_CHOSEN_LIST",
   payload: list,
 });

@@ -1,8 +1,8 @@
 import { TAnime } from "./../../types/anime";
 import { ISearch } from "./../../types/service";
 
-export const setNewAnime = (anime: ISearch[]) => ({
-  type: "SET_NEW_ANIME",
+export const setAnimeList = (anime: ISearch[]) => ({
+  type: "SET_ANIME_LIST",
   payload: anime,
 });
 
@@ -11,7 +11,7 @@ export const addNewAnime = (anime: TAnime) => ({
   payload: anime,
 });
 
-export const removeAnime = (anime: any) => ({
+export const removeAnime = (animeId: number) => ({
   type: "REMOVE_ANIME",
-  payload: anime,
+  payload: animeId,
 });

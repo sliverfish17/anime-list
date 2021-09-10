@@ -13,7 +13,7 @@ const RightBar: React.FC = () => {
   );
   const { list } = useTypedSelector((state) => state.activeList);
 
-  const { setNewAnime } = useActions();
+  const { setAnimeList } = useActions();
 
   useEffect(() => {
     (async () => {
@@ -22,7 +22,7 @@ const RightBar: React.FC = () => {
         if (!data) return;
         const animes = await getAnime(data[list]);
         if (animes) {
-          setNewAnime(animes);
+          setAnimeList(animes);
         }
       } else return;
     })();
